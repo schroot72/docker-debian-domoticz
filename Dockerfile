@@ -27,7 +27,7 @@ curl -sL https://deb.nodesource.com/setup_15.x | bash - && \
 apt-get install -y nodejs && \
 npm install -g mqtt url request && \
 apt-get install -y mosquitto mosquitto-clients && \
-npm install -g --unsafe-perm node-red && \
+npm install -g --unsafe-perm node-red
 #
 
 #
