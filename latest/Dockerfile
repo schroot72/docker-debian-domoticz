@@ -22,7 +22,7 @@ git clone --depth 2 https://github.com/domoticz/domoticz.git /src/domoticz && cd
 #
 # download run.sh file and make it executable
 #
-cd / && wget https://www.schrooten.com/docker/run.sh && \
+cd / && wget https://raw.githubusercontent.com/schroot72/docker-debian-domoticz/main/run.sh && \
 chmod +x /run.sh && \
 #
 # install mosquitto and required files
