@@ -21,7 +21,7 @@ git clone --depth 2 https://github.com/domoticz/domoticz.git /src/domoticz && cd
 #
 # download run.sh file and make it executable
 #
-cd / && wget https://www.schrooten.com/docker/run.sh && \
+cd / && wget https://raw.githubusercontent.com/schroot72/docker-debian-domoticz/main/run.sh && \
 chmod +x /run.sh && \
 #
 # install mosquitto and required files
@@ -39,7 +39,7 @@ git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plug
 #
 # update to latest beta
 #
-cd /src/domoticz && wget https://www.schrooten.com/docker/updatebeta-norestart.sh && \
+cd /src/domoticz && wget https://raw.githubusercontent.com/schroot72/docker-debian-domoticz/main/updatebeta-norestart.sh && \
 chmod +x /src/domoticz/updatebeta-norestart.sh && \
 /src/domoticz/updatebeta-norestart.sh 
 #
