@@ -1,7 +1,14 @@
 #
-# We will base our new image on the Latest Official Debian 
+# We will base our new image on the Latest Official Debian
+#
 FROM debian:latest
- #
+#
+# set viarables
+#
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Amsterdam
+ENV Version=1.1
+#
 # Identify the maintainer of an image
 LABEL maintainer="alwin@schrooten.com"
 #
@@ -35,18 +42,24 @@ npm install -g --unsafe-perm node-red && \
 # Install Tuya Internet Plugin
 #
 pip3 install tuyaha requests && \
-git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plugins/Domotcz-TUYA-Plugin && \
+git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plugins/Domoticz-TUYA-Plugin && \
+#
+# Istall DeCONZ Zigbee plugin
+#
+git clone https://github.com/Smanar/Domoticz-deCONZ.git /src/domoticz/plugins/Domoticz-deCONZ && \
 #
 # update to latest beta
 #
 cd /src/domoticz && wget https://raw.githubusercontent.com/schroot72/docker-debian-domoticz/main/updatebeta-norestart.sh && \
 chmod +x /src/domoticz/updatebeta-norestart.sh && \
-/src/domoticz/updatebeta-norestart.sh 
+/src/domoticz/updatebeta-norestart.sh && \
+#
+# Set version on disk for future plugin updates through run.sh scripts
+#
+echo "version 1.1" > /src/docker-debian-domoticz.txt
 #
 # Expose ports
 EXPOSE 8080 1443 1883 6144
-
- 
 #
 # Last is the actual command to start the run script to create the config folder and start domoticz
 CMD ["/bin/bash /run.sh"]
