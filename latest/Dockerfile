@@ -45,6 +45,15 @@ npm install -g --unsafe-perm node-red && \
 pip3 install tuyaha requests && \
 git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plugins/Domotcz-TUYA-Plugin
 #
+# Istall DeCONZ Zigbee plugin
+#
+git clone https://github.com/Smanar/Domoticz-deCONZ.git /src/domoticz/plugins/Domoticz-deCONZ && \
+#
+# Set version on disk for future plugin updates through run.sh scripts
+#
+echo "version 1.1" > /src/docker-debian-domoticz.txt
+#
+#
 # Expose ports
 EXPOSE 8080 1443 1883 6144
 
