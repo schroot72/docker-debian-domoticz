@@ -43,7 +43,7 @@ npm install -g --unsafe-perm node-red && \
 # Install Tuya Internet Plugin
 #
 pip3 install tuyaha requests && \
-git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plugins/Domotcz-TUYA-Plugin
+git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plugins/Domotcz-TUYA-Plugin && \
 #
 # Istall DeCONZ Zigbee plugin
 #
