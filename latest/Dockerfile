@@ -1,9 +1,16 @@
-
 #
-# We will base our new image on the Latest Official Debian 
+# We will base our new image on the Latest Official Debian
+#
 FROM debian:latest
- #
+#
+# set viarables
+#
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Amsterdam
+ENV Version=1.1
+#
 # Identify the maintainer of an image
+#
 LABEL maintainer="alwin@schrooten.com"
 #
 # Update and install required packages for domoticz
