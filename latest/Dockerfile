@@ -7,7 +7,7 @@ FROM debian:latest
 #
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Amsterdam
-ENV Version=1.1
+ENV Version=1.2
 #
 # Identify the maintainer of an image
 #
@@ -51,11 +51,11 @@ git clone https://github.com/Smanar/Domoticz-deCONZ.git /src/domoticz/plugins/Do
 #
 # Set version on disk for future plugin updates through run.sh scripts
 #
-echo "version 1.1" > /src/docker-debian-domoticz.txt
+echo "version 1.2" > /src/docker-debian-domoticz.txt
 #
 #
 # Expose ports
-EXPOSE 8080 1443 1883 6144
+EXPOSE 8080 1883 6144
 
  
 #
