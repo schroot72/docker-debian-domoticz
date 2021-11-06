@@ -34,11 +34,13 @@ chmod +x /run.sh && \
 #
 # install mosquitto and required files
 #
-curl -sL https://deb.nodesource.com/setup_15.x | bash - && \
+curl -sL https://deb.nodesource.com/setup_17.x | bash - && \
 apt-get install -y nodejs && \
 npm install -g mqtt url request && \
 apt-get install -y mosquitto mosquitto-clients && \
 npm install -g --unsafe-perm node-red && \
+npm install -g npm@8.1.3 && \
+mkdir /var/run/mosquitto/ && chown mosquitto: /var/run/mosquitto && \
 #
 # Install Tuya Internet Plugin
 #
