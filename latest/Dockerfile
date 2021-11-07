@@ -40,7 +40,7 @@ npm install -g mqtt url request && \
 apt-get install -y mosquitto mosquitto-clients && \
 npm install -g --unsafe-perm node-red && \
 npm install -g npm@8.1.3 && \
-mkdir /var/run/mosquitto/ && chown mosquitto: /var/run/mosquitto && \
+mkdir /var/run/mosquitto/ && chown mosquitto:mosquitto /var/run/mosquitto && \
 #
 # Install Tuya Internet Plugin
 #
