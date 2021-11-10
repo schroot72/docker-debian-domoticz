@@ -7,7 +7,7 @@ FROM debian:10.9
 #
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Amsterdam
-ENV Version=1.2
+ENV Version=1.2.1
 #
 # Identify the maintainer of an image
 #
@@ -46,7 +46,6 @@ rm /mosquitto-repo.gpg.key && \
 wget http://repo.mosquitto.org/debian/mosquitto-buster.list -P /etc/apt/sources.list.d/ && \
 apt-get update && \
 apt-get install -y mosquitto mosquitto-clients && \
-mkdir /var/run/mosquitto/ && chown mosquitto:mosquitto /var/run/mosquitto && \
 echo "listener 1883" >> /etc/mosquitto/mosquitto.conf && \
 echo "allow_anonymous true" >> /etc/mosquitto/mosquitto.conf && \
 #
@@ -67,7 +66,7 @@ git clone https://github.com/Smanar/Domoticz-deCONZ.git /src/domoticz/plugins/Do
 #
 # Set version on disk for future plugin updates through run.sh scripts
 #
-echo "version 1.2" > /src/docker-debian-domoticz.txt
+echo "version 1.2.1" > /src/docker-debian-domoticz.txt
 #
 #
 # Expose ports
