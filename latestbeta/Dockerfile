@@ -1,15 +1,16 @@
 #
 # We will base our new image on the Latest Official Debian
 #
-FROM debian:latest
+FROM debian:10.9
 #
 # set viarables
 #
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Amsterdam
-ENV Version=1.1
+ENV Version=1.2.1
 #
 # Identify the maintainer of an image
+#
 LABEL maintainer="alwin@schrooten.com"
 #
 # Update and install required packages for domoticz
@@ -31,13 +32,28 @@ git clone --depth 2 https://github.com/domoticz/domoticz.git /src/domoticz && cd
 cd / && wget https://raw.githubusercontent.com/schroot72/docker-debian-domoticz/main/run.sh && \
 chmod +x /run.sh && \
 #
-# install mosquitto and required files
+# install nodejs and mqtt
 #
-curl -sL https://deb.nodesource.com/setup_15.x | bash - && \
+curl -sL https://deb.nodesource.com/setup_17.x | bash - && \
 apt-get install -y nodejs && \
 npm install -g mqtt url request && \
+#
+# install mosquitto
+#
+wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key -P / && \
+apt-key add /mosquitto-repo.gpg.key && \
+rm /mosquitto-repo.gpg.key && \
+wget http://repo.mosquitto.org/debian/mosquitto-buster.list -P /etc/apt/sources.list.d/ && \
+apt-get update && \
 apt-get install -y mosquitto mosquitto-clients && \
+echo "listener 1883" >> /etc/mosquitto/mosquitto.conf && \
+echo "allow_anonymous true" >> /etc/mosquitto/mosquitto.conf && \
+#
+#Install Node-red and update npm
+#
 npm install -g --unsafe-perm node-red && \
+npm install -g npm@8.1.3 && \
+mkdir /var/run/mosquitto/ && chown mosquitto:mosquitto /var/run/mosquitto && \
 #
 # Install Tuya Internet Plugin
 #
@@ -47,6 +63,10 @@ git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plug
 # Istall DeCONZ Zigbee plugin
 #
 git clone https://github.com/Smanar/Domoticz-deCONZ.git /src/domoticz/plugins/Domoticz-deCONZ && \
+
+#
+# Last is the actual command to start the run script to create the config folder and start domoticz
+CMD ["/bin/bash /run.sh"]
 #
 # update to latest beta
 #
@@ -56,7 +76,7 @@ chmod +x /src/domoticz/updatebeta-norestart.sh && \
 #
 # Set version on disk for future plugin updates through run.sh scripts
 #
-echo "version 1.1" > /src/docker-debian-domoticz.txt
+echo "version 1.2.1" > /src/docker-debian-domoticz.txt
 #
 # Expose ports
 EXPOSE 8080 1443 1883 6144
