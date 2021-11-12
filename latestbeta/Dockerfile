@@ -63,10 +63,6 @@ git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plug
 # Istall DeCONZ Zigbee plugin
 #
 git clone https://github.com/Smanar/Domoticz-deCONZ.git /src/domoticz/plugins/Domoticz-deCONZ && \
-
-#
-# Last is the actual command to start the run script to create the config folder and start domoticz
-CMD ["/bin/bash /run.sh"]
 #
 # update to latest beta
 #
