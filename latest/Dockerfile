@@ -24,7 +24,7 @@ cd /home && wget https://github.com/Kitware/CMake/releases/download/v3.22.1/cmak
 #
 # change boost version
 #
-apt remove --purge --auto-remove libboost-dev libboost-thread-dev libboost-system-dev libboost-atomic-dev libboost-regex-dev libboost-chrono-dev && \
+apt remove --purge --auto-remove libboost-dev libboost-thread-dev libboost-system-dev libboost-atomic-dev libboost-regex-dev libboost-chrono-dev -y && \
 cd /home && mkdir boost && cd boost && wget https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.gz && tar xfz boost_1_78_0.tar.gz && cd boost_1_78_0/ && ./bootstrap.sh && ./b2 stage threading=multi link=static --with-thread --with-system && ./b2 install threading=multi link=static --with-thread --with-system && cd ../../ && sudo rm -Rf boost/ && \
 #
 # Download domoticz and OpenZWave and compile them
