@@ -1,5 +1,5 @@
 #
-# We will base our new image on the Latest Official Debian
+# We will base our new image on the Latest Official Debian v10
 #
 FROM debian:10.9
 #
@@ -7,7 +7,7 @@ FROM debian:10.9
 #
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Amsterdam
-ENV Version=1.2.1
+ENV Version=1.3.0
 #
 # Identify the maintainer of an image
 #
@@ -16,11 +16,16 @@ LABEL maintainer="alwin@schrooten.com"
 # Update and install required packages for domoticz
 #
 RUN apt-get update && apt-get upgrade -y && \
-apt-get install -y --no-install-recommends --fix-missing git libssl1.1 libssl-dev  build-essential cmake  libboost-dev  libboost-thread-dev  libboost-system-dev  libboost-date-time-dev  libsqlite3-0 libsqlite3-dev  wget curl libcurl4 libcurl4-openssl-dev libusb-0.1-4 libusb-dev  zlib1g-dev  libudev-dev linux-headers-amd64  python3-dev  ca-certificates liblua5.3-0 liblua5.3-dev libcereal-dev systemd python3-pip nano && \
+apt install -y --no-install-recommends --fix-missing git libssl1.1 libssl-dev  build-essential cmake  libboost-dev  libboost-thread-dev  libboost-system-dev  libboost-date-time-dev  libsqlite3-0 libsqlite3-dev  wget curl libcurl4 libcurl4-openssl-dev libusb-0.1-4 libusb-dev  zlib1g-dev  libudev-dev linux-headers-amd64  python3-dev  ca-certificates liblua5.3-0 liblua5.3-dev libcereal-dev systemd python3-pip nano && \
 #
 # install latest CMake for Domoticz
 #
-cd /home && wget https://github.com/Kitware/CMake/releases/download/v3.19.2/cmake-3.19.2-Linux-x86_64.sh && mkdir /opt/cmake && sh cmake-3.19.2-Linux-x86_64.sh --prefix=/opt/cmake --exclude-subdir --skip-license && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
+cd /home && wget https://github.com/Kitware/CMake/releases/download/v3.22.1/cmake-3.22.1-Linux-x86_64.sh && mkdir /opt/cmake && sh cmake-3.22.1-Linux-x86_64.sh --prefix=/opt/cmake --exclude-subdir --skip-license && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
+#
+# change boost version
+#
+apt remove --purge --auto-remove libboost-dev libboost-thread-dev libboost-system-dev libboost-atomic-dev libboost-regex-dev libboost-chrono-dev -y && \
+cd /home && mkdir boost && cd boost && wget https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.gz && tar xfz boost_1_78_0.tar.gz && cd boost_1_78_0/ && ./bootstrap.sh && ./b2 stage threading=multi link=static --with-thread --with-system && ./b2 install threading=multi link=static --with-thread --with-system && cd ../../ && rm -Rf boost/ && \
 #
 # Download domoticz and OpenZWave and compile them
 #
@@ -72,7 +77,7 @@ chmod +x /src/domoticz/updatebeta-norestart.sh && \
 #
 # Set version on disk for future plugin updates through run.sh scripts
 #
-echo "version 1.2.1" > /src/docker-debian-domoticz.txt
+echo "version 1.3.0" > /src/docker-debian-domoticz.txt
 #
 # Expose ports
 EXPOSE 8080 1883 6144
