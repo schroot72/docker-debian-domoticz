@@ -75,9 +75,7 @@ echo "version 1.3.0" > /src/docker-debian-domoticz.txt
 #
 #
 # Expose ports
-EXPOSE 8080 1883 6144
-
- 
+EXPOSE 8080 6144
 #
 # Last is the actual command to start the run script to create the config folder and start domoticz
-CMD ["/bin/bash /run.sh"]
+CMD ["bash /run.sh"]
