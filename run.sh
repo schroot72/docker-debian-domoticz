@@ -6,10 +6,12 @@
 [[ ! -e /config/www ]] && cp -R /src/domoticz/www /config/
 
 file="/config/docker-debian-domoticz.txt"
+newfile="/src/docker-debian-domoticz.txt"
 if [ -f "$file" ] 
 then
  version=$(cat "$file")
-  if [ "$version" != "versie 1.3.0" ] 
+ newversion=$cat "$newfile")
+  if [ "$version" != "$newversion" ] 
 then
     cp -Ru /src/domoticz/www /config/
    cp /src/docker-debian-domoticz.txt /config/
