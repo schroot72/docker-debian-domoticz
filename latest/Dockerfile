@@ -69,6 +69,10 @@ git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plug
 #
 git clone https://github.com/Smanar/Domoticz-deCONZ.git /src/domoticz/plugins/Domoticz-deCONZ && \
 #
+# Clean up libraries
+#
+apt-get clean && \
+#
 # Set version on disk for future plugin updates through run.sh scripts
 #
 echo "version 1.3.0" > /src/docker-debian-domoticz.txt
