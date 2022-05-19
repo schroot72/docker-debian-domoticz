@@ -10,7 +10,7 @@ newfile="/src/docker-debian-domoticz.txt"
 if [ -f "$file" ] 
 then
  version=$(cat "$file")
- newversion=$cat "$newfile")
+ newversion=$(cat "$newfile")
   if [ "$version" != "$newversion" ] 
 then
     cp -Ru /src/domoticz/www /config/
