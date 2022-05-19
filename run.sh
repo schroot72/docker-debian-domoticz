@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# version 2022-05-19
 
 [[ ! -e /config/scripts ]] && cp -R /src/domoticz/scripts /config/
 [[ ! -e /config/plugins ]] && cp -R /src/domoticz/plugins /config/
