@@ -1,13 +1,13 @@
 #
 # We will base our new image on the Latest Official Debian v10
 #
-FROM debian:10.9
+FROM debian:latest
 #
 # set viarables
 #
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Amsterdam
-ENV Version=1.3.0
+ENV Version=1.4.0
 #
 # Identify the maintainer of an image
 #
@@ -20,12 +20,12 @@ apt install -y --no-install-recommends --fix-missing git libssl1.1 libssl-dev  b
 #
 # install latest CMake for Domoticz
 #
-cd /home && wget https://github.com/Kitware/CMake/releases/download/v3.22.1/cmake-3.22.1-Linux-x86_64.sh && mkdir /opt/cmake && sh cmake-3.22.1-Linux-x86_64.sh --prefix=/opt/cmake --exclude-subdir --skip-license && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
+cd /home && wget https://github.com/Kitware/CMake/releases/download/v3.24.2/cmake-3.24.2-Linux-x86_64.sh && mkdir /opt/cmake && sh cmake-3.24.2-Linux-x86_64.sh --prefix=/opt/cmake --exclude-subdir --skip-license && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
 #
 # change boost version
 #
 apt remove --purge --auto-remove libboost-dev libboost-thread-dev libboost-system-dev libboost-atomic-dev libboost-regex-dev libboost-chrono-dev -y && \
-cd /home && mkdir boost && cd boost && wget https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.gz && tar xfz boost_1_78_0.tar.gz && cd boost_1_78_0/ && ./bootstrap.sh && ./b2 stage threading=multi link=static --with-thread --with-system && ./b2 install threading=multi link=static --with-thread --with-system && cd ../../ && rm -Rf boost/ && \
+cd /home && mkdir boost && cd boost && wget https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz && tar xfz boost_1_80_0.tar.gz && cd boost_1_80_0/ && ./bootstrap.sh && ./b2 stage threading=multi link=static --with-thread --with-system && ./b2 install threading=multi link=static --with-thread --with-system && cd ../../ && rm -Rf boost/ && \
 #
 # Download domoticz and OpenZWave and compile them
 #
@@ -39,7 +39,7 @@ chmod +x /run.sh && \
 #
 # install nodejs and mqtt
 #
-curl -sL https://deb.nodesource.com/setup_17.x | bash - && \
+curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
 apt-get install -y nodejs && \
 npm install -g mqtt url request && \
 #
@@ -57,7 +57,7 @@ echo "allow_anonymous true" >> /etc/mosquitto/mosquitto.conf && \
 #Install Node-red and update npm
 #
 npm install -g --unsafe-perm node-red && \
-npm install -g npm@8.1.3 && \
+npm install -g npm@8.19.2 && \
 mkdir /var/run/mosquitto/ && chown mosquitto:mosquitto /var/run/mosquitto && \
 #
 # Install Tuya Internet Plugin
@@ -75,7 +75,7 @@ apt-get clean && \
 #
 # Set version on disk for future plugin updates through run.sh scripts
 #
-echo "version 1.3.0" > /src/docker-debian-domoticz.txt
+echo "version 1.4.0" > /src/docker-debian-domoticz.txt
 #
 #
 # Expose ports
