@@ -16,7 +16,7 @@ LABEL maintainer="alwin@schrooten.com"
 # Update and install required packages for domoticz
 #
 RUN apt-get update && apt-get upgrade -y && \
-apt install -y --no-install-recommends --fix-missing git libssl1.1 libssl-dev  build-essential cmake  libboost-dev  libboost-thread-dev  libboost-system-dev  libboost-date-time-dev  libsqlite3-0 libsqlite3-dev  wget curl libcurl4 libcurl4-openssl-dev libusb-0.1-4 libusb-dev  zlib1g-dev  libudev-dev linux-headers-amd64  python3-dev  ca-certificates liblua5.3-0 liblua5.3-dev libcereal-dev systemd python3-pip nano && \
+apt install -y --no-install-recommends --fix-missing git libssl3 libssl-dev  build-essential cmake  libboost-dev  libboost-thread-dev  libboost-system-dev  libboost-date-time-dev  libsqlite3-0 libsqlite3-dev  wget curl libcurl4 libcurl4-openssl-dev libusb-0.1-4 libusb-dev  zlib1g-dev  libudev-dev linux-headers-amd64  python3-dev  ca-certificates liblua5.3-0 liblua5.3-dev libcereal-dev systemd python3-pip nano && \
 #
 # install latest CMake for Domoticz
 #
