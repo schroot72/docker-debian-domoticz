@@ -1,5 +1,5 @@
 #
-# We will base our new image on the Latest Official Debian v10
+# We will base our new image on the Latest Official Debian
 #
 FROM debian:latest
 #
@@ -7,7 +7,7 @@ FROM debian:latest
 #
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Amsterdam
-ENV Version=1.4.0
+ENV Version=1.5.0
 #
 # Identify the maintainer of an image
 #
@@ -20,7 +20,7 @@ apt install -y --no-install-recommends --fix-missing git libssl1.1 libssl-dev  b
 #
 # install latest CMake for Domoticz
 #
-cd /home && wget https://github.com/Kitware/CMake/releases/download/v3.24.2/cmake-3.24.2-Linux-x86_64.sh && mkdir /opt/cmake && sh cmake-3.24.2-Linux-x86_64.sh --prefix=/opt/cmake --exclude-subdir --skip-license && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
+cd /home && wget https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-Linux-x86_64.sh && mkdir /opt/cmake && sh cmake-3.28.1-Linux-x86_64.sh --prefix=/opt/cmake --exclude-subdir --skip-license && ln -s /opt/cmake/bin/cmake /usr/local/bin/cmake && \
 #
 # change boost version
 #
@@ -39,7 +39,7 @@ chmod +x /run.sh && \
 #
 # install nodejs and mqtt
 #
-curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
 apt-get install -y nodejs && \
 npm install -g mqtt url request && \
 #
@@ -60,10 +60,10 @@ npm install -g --unsafe-perm node-red && \
 npm install -g npm@8.19.2 && \
 mkdir /var/run/mosquitto/ && chown mosquitto:mosquitto /var/run/mosquitto && \
 #
-# Install Tuya Internet Plugin
+# Install Tuya Internet Plugin / removed as per verison 1.5.0
 #
-pip3 install tuyaha requests && \
-git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plugins/Domoticz-TUYA-Plugin && \
+# pip3 install tuyaha requests && \
+# git clone https://github.com/Xenomes/Domoticz-TUYA-Plugin.git /src/domoticz/plugins/Domoticz-TUYA-Plugin && \
 #
 # Istall DeCONZ Zigbee plugin
 #
@@ -75,7 +75,7 @@ apt-get clean && \
 #
 # Set version on disk for future plugin updates through run.sh scripts
 #
-echo "version 1.4.0" > /src/docker-debian-domoticz.txt
+echo "version 1.5.0" > /src/docker-debian-domoticz.txt
 #
 #
 # Expose ports
