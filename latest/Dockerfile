@@ -75,7 +75,7 @@ apt-get clean && \
 #
 # Set version on disk for future plugin updates through run.sh scripts
 #
-echo "version 1.5.0" > /src/docker-debian-domoticz.txt
+echo "version 1.5.1" > /src/docker-debian-domoticz.txt
 #
 #
 # Expose ports
