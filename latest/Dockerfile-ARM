@@ -7,7 +7,7 @@ FROM debian:latest
 #
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Amsterdam
-ENV Version=1.5.2
+ENV Version=1.5.3
 #
 # Identify the maintainer of an image
 #
@@ -66,6 +66,7 @@ mkdir /var/run/mosquitto/ && chown mosquitto:mosquitto /var/run/mosquitto && \
 #
 # Install SolrEdge Modbus
 git clone https://github.com/addiejanssen/domoticz-solaredge-modbustcp-plugin.git /src/domoticz/plugins/domoticz-solaredgde-modbustcp-plugin && \
+python3 -m pip config set global.break-system-packages true && \
 cd /src/domoticz/plugins/domoticz-solaredgde-modbustcp-plugin && echo "solaredge_modbus==0.8.0" > ./requirements.txt && pip3 install -r requirements.txt && \
 #
 # Istall DeCONZ Zigbee plugin
@@ -78,7 +79,7 @@ apt-get clean && \
 #
 # Set version on disk for future plugin updates through run.sh scripts
 #
-echo "version 1.5.2" > /src/docker-debian-domoticz.txt
+echo "version 1.5.3" > /src/docker-debian-domoticz.txt
 #
 #
 # Expose ports
