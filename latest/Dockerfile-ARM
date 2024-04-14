@@ -72,6 +72,7 @@ cd /src/domoticz/plugins/domoticz-solaredgde-modbustcp-plugin && echo "solaredge
 # Istall DeCONZ Zigbee plugin
 #
 git clone https://github.com/Smanar/Domoticz-deCONZ.git /src/domoticz/plugins/Domoticz-deCONZ && \
+pip3 install requests && \
 #
 # Clean up libraries
 #
